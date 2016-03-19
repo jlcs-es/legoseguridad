@@ -7,6 +7,7 @@ network:
 saml:
 	cd SAML; \
 	sh install.sh; \
+	sh sp.sh
 #TODO: revisar según idp sp 2x equipo
 
 ssh:
