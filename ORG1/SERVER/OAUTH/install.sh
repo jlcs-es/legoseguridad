@@ -41,7 +41,7 @@ cd /var/www/php-oauth
 
 
 php /var/www/php-oauth/docs/initOAuthDatabase.php
-#Revisar /var/www/php-oauth/config/oauth.ini para más configuraciones (linea authenticationMechanism=SspResourceOwner)
+#TODO: Revisar /var/www/php-oauth/config/oauth.ini para más configuraciones (linea authenticationMechanism=SspResourceOwner)
 
 php /var/www/php-oauth/docs/registerClients.php /var/www/php-oauth/docs/myregistration.json
 #Registrar scopes autorizados

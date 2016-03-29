@@ -10,6 +10,10 @@ saml:
 	sh sp.sh
 #TODO: revisar según idp sp 2x equipo
 
+escenario:
+	cd ESCENARIO; \
+	sh install.sh
+
 ssh:
 	cp sshd_config /etc/ssh/sshd_config
 	service ssh restart
