@@ -90,7 +90,7 @@ El botón de \textit{Comparar 2 huellas} abre dos veces el explorador de fichero
 
 \begin{center}
 	\includegraphics[width=0.55\linewidth]{images/huellas/5.png}
-	
+
 	\textit{Ventana de la aplicación}
 \end{center}
 
@@ -98,7 +98,7 @@ Los siguientes botones sí usan la funcionalidad de usuarios del programa. Cuand
 
 \begin{center}
 	\includegraphics[width=0.45\linewidth]{images/huellas/1.png}
-	
+
 	\textit{Ventana para registrar un nuevo usuario}
 \end{center}
 
@@ -107,7 +107,7 @@ Al pulsar en \textit{1 to 1 Match} se realiza una \textbf{verificación} entre u
 
 \begin{center}
 	\includegraphics[width=1\linewidth]{images/huellas/3.png}
-	
+
 	\textit{Listado de usuarios para la verificación}
 \end{center}
 
@@ -115,7 +115,7 @@ Al pulsar en \textit{1 to N Match} se realiza la comparación de un nuevo ficher
 
 \begin{center}
 	\includegraphics[width=0.5\linewidth]{images/huellas/2.png}
-	
+
 	\textit{Listado de usuarios con huellas que superan el matching}
 \end{center}
 
@@ -124,19 +124,19 @@ Por último tenemos las opciones de configuración del menú superior. Tenemos u
 
 \begin{center}
 	\includegraphics[width=0.25\linewidth]{images/huellas/4.png}
-	
+
 	\textit{Menú Parámetros}
 \end{center}
 
 \begin{center}
 	\includegraphics[width=0.25\linewidth]{images/huellas/6.png}
-	
+
 	\textit{Ventana emergente para configurar el porcentaje de similitud}
 \end{center}
 
 \begin{center}
 	\includegraphics[width=0.25\linewidth]{images/huellas/7.png}
-	
+
 	\textit{Cuadro de texto en el tercer panel con la información de los parámetros actuales}
 \end{center}
 
@@ -165,7 +165,106 @@ En el fichero \textit{CEntityForm.java} se implementa el resto de la funcionalid
 
 
 
+\clearpage
 
 \section{Escenario de gestión de identidad}
+
+Como grupo 3 desplegaremos las organizaciones 31 y 32. Partimos del escenario inicial de LEGO propuesto en el enunciado, con algunos cambios.
+En la siguiente imagen se muestra una imagen con la arquitectura a desarrollar.
+
+\begin{center}
+	\includegraphics[width=1\linewidth]{images/samloauth/escenario.png}
+
+	\textit{Escenario LEGO de gestión de identidad}
+\end{center}
+
+Se nos pide desarrollar un escenario donde el \textit{Resource Owner}, el usuario por medio de su explorador web, se conecta a \textit{appclient.org32},
+donde quiere iniciar sesión. Al pinchar en \textit{Login} la web \textit{appclient} le redirige al servidor de \textbf{autorización}, donde pedirá poder acceder
+a los datos del usuario para iniciar sesión. Esto se realizará por OAuth con la máquina \textit{oauth.org31}, estando aquí el principal cambio con respecto
+a la arquitectura propuesta, que comentaremos por qué más adelante. En este punto \textit{oauth.org31} aún no sabe de qué usuario se trata, por eso necesita que
+iniciemos sesión, pero como \textit{oauth.org31} no maneja los usuarios y credenciales, actúa como un \textit{SP} usando SAML con el IdP en la máquina \textit{saml.org31},
+la cual sí tiene configurados los usuarios y contraseñas. Una vez nos \textbf{autenticamos} en \textit{saml.org31}, como \textit{Resource Owner} damos permiso en
+\textit{oauth.org31} para dar los datos de inicio de sesión a \textit{appclient.org32}.
+
+%TODO: ¿Qué coño hace appserver?
+
+\hfill
+
+Hemos cambiado \textit{oauth} de la Organización 32 a la Organización 31 debido a las complicaciones de separar la implementación del proyecto de Phillip Shipley en varias máquinas
+en el paso del enlace simbólico. Consideramos que la estructura actual sigue representando una situación de organizaciones realista. Poniendo de ejemplo Google y Doodle,
+Doodle sería \textit{appclient} en la Organización 32, y Google sería \textit{oauth} como el servidor de autorización, el que muestra qué cosas compartirás con Doodle, como tu nombre y correo,
+también será \textit{saml}, el IdP con el que iniciarás sesión, y puede añadir características extra como el \textit{second factor of authentication}, y también el \textit{appserver} por ejemplo
+con la lista de contactos u otro elemento del que hayas dado permisos en la autorización de \textit{oauth}.
+
+Como \textit{saml.org31} y \textit{oauth.org31} pertenecerían ambos a Google, pueden estar en la misma máquina hasta que se resuelva el tecnicismo del enlace simbólico.
+
+\hfill
+
+\subsection{Scripts de instalación}
+
+Para automatizar la configuración del escenario en cualquier máquina, hemos escrito una serie de scripts que no necesitan de interacción manual una
+vez se inicia la instalación (excepto algún \textit{Enter} ocasional). Utilizamos la herramienta \textit{make} para facilitar aún más
+el despliegue. La organización de los scripts corresponde a una jerarquía de directorios como la siguiente:
+
+\hfil
+
+\begin{BVerbatim}
+ROUTER
+	Makefile
+	network
+	test
+
+ORG1
+	SERVER
+		Makefile
+		network
+		test
+		ESCENARIO
+			install.sh
+			php-oauth-saml-demo-master
+				appserver
+				php-oauth
+				simplesamlphp
+				vagrant
+
+ORG2
+	SERVER
+		Makefile
+		network
+		test
+		ESCENARIO
+			install.sh
+			php-oauth-saml-demo-master
+				appclient
+				vagrant
+\end{BVerbatim}
+
+\hfill
+
+
+Donde ESCENARIO sirve como carpeta contenedora de los scripts específicos de esta práctica, mientras que otros ficheros como \textit{network} nos
+permiten configurar LEGO automáticamente, configurando la red, el forwarding, la resolución de DNS o fichero \textit{hosts}, etc.
+
+También usamos otros directorios, como SAML para la práctica 2, u OAUTH para la 3, de donde reutilizamos parte de los scripts para ESCENARIO.
+
+
+\hfill
+
+En la práctica, para ejecutarlos basta con irse al directorio correspondiente, por ejemplo, para configurar la Organización 31, navegamos a ORG1/SERVER/, y desde ahí
+ejecutamos la orden:
+
+\begin{verbatim}
+sudo make [network] [escenario] [saml] [test] [...]
+\end{verbatim}
+
+Si no ponemos argumentos, por defecto aplicaría la configuración de la red y la del escenario. De querer instalar la práctica 2, deberíamos indicar \textit{saml}, y, por ejemplo, para
+probar la configuración, \textit{test}.
+
+
+\subsection{Configuración de la Organización 31: appserver, php-oauth y simplesamlphp}
+
+\subsection{Configuración de la Organización 32: appclient}
+
+
 
 \end{document}
