@@ -9,6 +9,7 @@
 
 apt-get install -y php5 php5-mysql php5-curl php5-gmp php5-sqlite php5-mcrypt
 php5enmod mcrypt
+apt-get install -y subversion
 
 
 cp php-oauth-saml-demo-master/vagrant/vhost-local.conf  /etc/apache2/mods-enabled

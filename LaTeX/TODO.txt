@@ -18,14 +18,23 @@ DONE    ·Modificar fichero vagrant/vhost de la práctica de oauth, con los virt
         Comparar estos ficheros con los de la práctica de saml, comprobar
         dónde poner los certificados, etc.
 
-        +En simpleSAMLphp/metadata/saml20-idp-hosted.php se referencian los
-        certificados, de simplesamlphp/cert:
-            ·Cambiar por los que generamos nosotros con nuestra info.
 
 
-    ·Al configurar php-oauth se pide:
+
+DONE    ·Al configurar php-oauth se pide:
             "Enlazar instancia de OAuth a simpleSAMLphp:
         
             sudo ln –s /var/www/simplesamlphp/www/ /var/www/php-oauth/www/simplesaml"
         Problema: ahora están en distintas páginas. Ver para qué se usa este
         enlace y cómo apañarlo.
+
+
+    +En simpleSAMLphp/metadata/saml20-idp-hosted.php se referencian los
+    certificados, de simplesamlphp/cert:
+        ·Cambiar por los que generamos nosotros con nuestra info.
+
+    ·Meter https
+
+    ·Buscar error de redirección a appclient.local tras el login
+
+    ·Meter integración con twitter
