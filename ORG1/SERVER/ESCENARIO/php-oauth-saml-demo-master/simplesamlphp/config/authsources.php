@@ -77,7 +77,7 @@ $config = array(
 		'remember.username.enabled' => FALSE,
 		'remember.username.checked' => FALSE,
 
-        //'idp' => 'http://saml.local/',
+        //'idp' => 'http://saml.org31/',
 
 		'user1:pass1' => array(
 			'uid' => array('user1'),

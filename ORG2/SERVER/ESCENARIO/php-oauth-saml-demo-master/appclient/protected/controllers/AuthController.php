@@ -12,7 +12,7 @@ class AuthController extends Controller
     {
         Yii::app()->user->clearStates();
         Yii::app()->user->logout(true);
-        $this->redirect('http://saml.local/module.php/core/as_logout.php?AuthId=oauth-sp&ReturnTo=http://appclient.local/');
+        $this->redirect('http://saml.org31/module.php/core/as_logout.php?AuthId=oauth-sp&ReturnTo=http://appclient.org32/');
     }
 
     public function actionReturn()

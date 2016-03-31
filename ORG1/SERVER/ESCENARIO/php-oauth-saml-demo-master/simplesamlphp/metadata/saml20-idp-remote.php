@@ -22,8 +22,8 @@
 //	'certFingerprint'      => 'c9ed4dfb07caf13fc21e0fec1572047eb8a7a4cb'
 //);
 
-$metadata['http://saml.local/saml2/idp/metadata.php'] = array (
-    'entityid' => 'http://saml.local/saml2/idp/metadata.php',
+$metadata['http://saml.org31/saml2/idp/metadata.php'] = array (
+    'entityid' => 'http://saml.org31/saml2/idp/metadata.php',
     'contacts' =>
         array (
         ),
@@ -33,7 +33,7 @@ $metadata['http://saml.local/saml2/idp/metadata.php'] = array (
             0 =>
                 array (
                     'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-                    'Location' => 'http://saml.local/saml2/idp/SSOService.php',
+                    'Location' => 'http://saml.org31/saml2/idp/SSOService.php',
                 ),
         ),
     'SingleLogoutService' =>
@@ -41,7 +41,7 @@ $metadata['http://saml.local/saml2/idp/metadata.php'] = array (
             0 =>
                 array (
                     'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-                    'Location' => 'http://saml.local/saml2/idp/SingleLogoutService.php',
+                    'Location' => 'http://saml.org31/saml2/idp/SingleLogoutService.php',
                 ),
         ),
     'ArtifactResolutionService' =>
@@ -66,4 +66,3 @@ $metadata['http://saml.local/saml2/idp/metadata.php'] = array (
         ),
     'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
 );
-
