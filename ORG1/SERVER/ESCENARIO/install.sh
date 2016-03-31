@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#   Congiguración de appserver y simplesamlphp
+#   Congiguración de appserver, php-oauth y simplesamlphp
 #
 ###############################################################################
 
@@ -19,7 +19,7 @@ echo 'IncludeOptional mods-available/rewrite.load' | cat - /etc/apache2/apache2.
 # cp -R php-oauth-saml-demo-master/appclient /var/www
 cp -R php-oauth-saml-demo-master/appserver /var/www
 cp -R php-oauth-saml-demo-master/simplesamlphp /var/www
-# cp -R php-oauth-saml-demo-master/php-oauth /var/www
+cp -R php-oauth-saml-demo-master/php-oauth /var/www
 
 chmod -R 757 /var/www/*
 
@@ -31,9 +31,9 @@ cd /var/www/appserver
 curl -sS https://getcomposer.org/installer | php
 php composer.phar install
 
-# cd /var/www/php-oauth
-# curl -sS https://getcomposer.org/installer | php
-# php composer.phar install
+cd /var/www/php-oauth
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install
 
 cd /var/www/simplesamlphp
 curl -sS https://getcomposer.org/installer | php
@@ -42,17 +42,17 @@ sed 's/trunk@50/trunk/g' composer2.json > composer.json
 rm composer2.json
 php composer.phar update
 
-# cd /var/www/php-oauth
-# /var/www/php-oauth/docs/configure.sh
-#
-#
-# php /var/www/php-oauth/docs/initOAuthDatabase.php
-# #Revisar /var/www/php-oauth/config/oauth.ini para más configuraciones (linea authenticationMechanism=SspResourceOwner)
-#
-# php /var/www/php-oauth/docs/registerClients.php /var/www/php-oauth/docs/myregistration.json
-# #Registrar scopes autorizados
-#
-# ln -s /var/www/simplesamlphp/www/ /var/www/php-oauth/www/simplesaml
+cd /var/www/php-oauth
+/var/www/php-oauth/docs/configure.sh
+
+
+php /var/www/php-oauth/docs/initOAuthDatabase.php
+#Revisar /var/www/php-oauth/config/oauth.ini para más configuraciones (linea authenticationMechanism=SspResourceOwner)
+
+php /var/www/php-oauth/docs/registerClients.php /var/www/php-oauth/docs/myregistration.json
+#Registrar scopes autorizados
+
+ln -s /var/www/simplesamlphp/www/ /var/www/php-oauth/www/simplesaml
 
 
 
