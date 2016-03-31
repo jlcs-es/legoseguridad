@@ -92,9 +92,9 @@ return array(
             'client_secret' => 'crazysecret',
             'return_path' => 'auth/return',
             'scope' => 'profile documents tokeninfo',
-            'auth_url' => 'http://oauth.local/authorize.php',
-            'token_url' => 'http://oauth.local/token.php',
-            'api_url' => 'http://appserver.local/api',
+            'auth_url' => 'http://oauth.org31/authorize.php',
+            'token_url' => 'http://oauth.org31/token.php',
+            'api_url' => 'http://appserver.org31/api',
         ),
 	),
 );

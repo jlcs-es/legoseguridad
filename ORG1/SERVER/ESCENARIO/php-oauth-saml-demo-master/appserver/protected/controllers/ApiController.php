@@ -108,7 +108,7 @@ class ApiController extends Controller
                 // initialize the Resource Server, point it to introspection endpoint
                 $resourceServer = new ResourceServer(
                     new Client(
-                        "http://oauth.local/introspect.php"
+                        "http://oauth.org31/introspect.php"
                     )
                 );
                 $resourceServer->setAuthorizationHeader($authorizationHeader);

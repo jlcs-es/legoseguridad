@@ -12,8 +12,8 @@ $metadata['http://saml.org31/module.php/saml/sp/metadata.php/default-sp'] = arra
     'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
 );
 
-$metadata['http://oauth.org32/simplesaml/module.php/saml/sp/metadata.php/oauth-sp'] = array(
-    'AssertionConsumerService' => 'http://oauth.org32/simplesaml/module.php/saml/sp/saml2-acs.php/oauth-sp',
-    'SingleLogoutService'      => 'http://oauth.org32/simplesaml/module.php/saml/sp/saml2-logout.php/oauth-sp',
+$metadata['http://oauth.org31/simplesaml/module.php/saml/sp/metadata.php/oauth-sp'] = array(
+    'AssertionConsumerService' => 'http://oauth.org31/simplesaml/module.php/saml/sp/saml2-acs.php/oauth-sp',
+    'SingleLogoutService'      => 'http://oauth.org31/simplesaml/module.php/saml/sp/saml2-logout.php/oauth-sp',
     'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent',
 );

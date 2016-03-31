@@ -37,8 +37,10 @@ php composer.phar install
 
 cd /var/www/simplesamlphp
 curl -sS https://getcomposer.org/installer | php
-#TODO: nano composer.json hay que poner en la url https y en reference trunk
-#php composer.phar update
+sed 's/http\([^s].*\)googlecode/https\1googlecode/g' composer.json > composer2.json
+sed 's/trunk@50/trunk/g' composer2.json > composer.json
+rm composer2.json
+php composer.phar update
 
 # cd /var/www/php-oauth
 # /var/www/php-oauth/docs/configure.sh
