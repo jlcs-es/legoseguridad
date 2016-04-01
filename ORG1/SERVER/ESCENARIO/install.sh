@@ -13,11 +13,11 @@ apt-get install -y subversion
 
 
 cp php-oauth-saml-demo-master/vagrant/vhost-local.conf  /etc/apache2/mods-enabled
-cp php-oauth-saml-demo-master/vagrant/vhost-secure.conf.org31  /etc/apache2/mods-enabled
+cp php-oauth-saml-demo-master/vagrant/vhost-secure.conf.org31  /etc/apache2/mods-enabled/vhost-secure.conf
 mkdir /etc/apache2/cert
 cp ../../../CACERT/*.org31.* /etc/apache2/cert/
 chmod 644 /etc/apache2/mods-enabled/vhost-local.conf
-chmod 644 /etc/apache2/mods-enabled/vhost-secure.conf.org31
+chmod 644 /etc/apache2/mods-enabled/vhost-secure.conf
 
 echo 'IncludeOptional mods-available/rewrite.load' | cat - /etc/apache2/apache2.conf > temp && mv temp /etc/apache2/apache2.conf
 
