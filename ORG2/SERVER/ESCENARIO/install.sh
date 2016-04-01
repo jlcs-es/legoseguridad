@@ -6,7 +6,8 @@
 #
 ###############################################################################
 
-
+apt-get -y install apache2
+a2enmod ssl
 apt-get install -y php5 php5-mysql php5-curl php5-gmp php5-sqlite php5-mcrypt
 php5enmod mcrypt
 
