@@ -182,19 +182,19 @@ $config = array(
 	*/
 
 
-	/*
+
 	'facebook' => array(
 		'authfacebook:Facebook',
 		// Register your Facebook application on http://www.facebook.com/developers
 		// App ID or API key (requests with App ID should be faster; https://github.com/facebook/php-sdk/issues/214)
-		'api_key' => 'xxxxxxxxxxxxxxxx',
+		'api_key' => '1718474651758116',
 		// App Secret
-		'secret' => 'xxxxxxxxxxxxxxxx',
+		'secret' => 'ef0904e41779a0180bb6f85a4218abab',
 		// which additional data permissions to request from user
 		// see http://developers.facebook.com/docs/authentication/permissions/ for the full list
 		// 'req_perms' => 'email,user_birthday',
 	),
-	*/
+
 
 	/*
 	// LinkedIn OAuth Authentication API.

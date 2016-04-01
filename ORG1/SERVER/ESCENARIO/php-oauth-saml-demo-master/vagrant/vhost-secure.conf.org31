@@ -1,0 +1,54 @@
+<VirtualHost *:443>
+    SSLEngine on
+    SSLCertificateFile "/etc/apache2/cert/appserver.org31.crt"
+    SSLCertificateKeyFile "/etc/apache2/cert/appserver.org31.pem"
+
+    DocumentRoot "/var/www/appserver/public/"
+    ServerName appserver.org31
+    <Directory "/var/www/appserver/public/">
+    DirectoryIndex index.php
+        Options FollowSymLinks
+        AllowOverride FileInfo
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+    SSLEngine on
+    SSLCertificateFile "/etc/apache2/cert/saml.org31.crt"
+    SSLCertificateKeyFile "/etc/apache2/cert/saml.org31.pem"
+
+    DocumentRoot "/var/www/simplesamlphp/www/"
+    ServerName saml.org31
+    <Directory "/var/www/simplesamlphp/www/">
+    DirectoryIndex index.php
+        Options FollowSymLinks
+        AllowOverride FileInfo
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+    SSLEngine on
+    SSLCertificateFile "/etc/apache2/cert/oauth.org31.crt"
+    SSLCertificateKeyFile "/etc/apache2/cert/oauth.org31.pem"
+    DocumentRoot "/var/www/php-oauth/www/"
+    ServerName oauth.org31
+    <Directory /var/www/php-oauth/www>
+        AllowOverride None
+        Options FollowSymLinks
+
+        # CSP: https://developer.mozilla.org/en-US/docs/Security/CSP
+        #Header set Content-Security-Policy "default-src 'self'"
+        # for Firefox < 23, IE 10
+        #Header set X-Content-Security-Policy "default-src 'self'"
+
+        # X-Frame-Options: https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options
+        #Header set X-Frame-Options DENY
+
+        # HSTS: https://developer.mozilla.org/en-US/docs/Security/HTTP_Strict_Transport_Security
+        #Header set Strict-Transport-Security max-age=604800
+    </Directory>
+</VirtualHost>
