@@ -26,7 +26,7 @@ vlan-raw-device eth1
 EOF
 
 cat > /etc/hosts << EOF
-127.0.0.1   localhost
+127.0.0.1   localhost saml.local oauth.local appserver.local appclient.local
 127.0.0.1   Laboratorio27
 
 #ROUTER
@@ -40,8 +40,10 @@ cat > /etc/hosts << EOF
 192.168.31.100    server.org31
 192.168.31.100    saml.org31
 192.168.31.100    appserver.org31
-
 192.168.31.100    oauth.org31
+
+192.168.31.101    metasploitable.org31
+192.168.31.101    client.org31
 
 
 #ORG2
@@ -49,7 +51,6 @@ cat > /etc/hosts << EOF
 
 192.168.32.100    server.org32
 192.168.32.100    appclient.org32
-
 
 EOF
 

@@ -25,8 +25,10 @@ cat > /etc/hosts << EOF
 192.168.31.100    server.org31
 192.168.31.100    saml.org31
 192.168.31.100    appserver.org31
-
 192.168.31.100    oauth.org31
+
+192.168.31.101    metasploitable.org31
+192.168.31.101    client.org31
 
 
 #ORG2
