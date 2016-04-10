@@ -1,0 +1,121 @@
+POST /token.php HTTP/1.1
+Host: oauth.org31
+User-Agent: Guzzle/3.9.1 curl/7.35.0 PHP/5.5.9-1ubuntu4.14
+Accept: application/json
+Authorization: Basic YXBwY2xpZW50OmNyYXp5c2VjcmV0
+Content-Length: 152
+
+HTTP/1.1 200 OK
+Date: Sun, 10Apr 2016 17:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+Cache-Control: no-store
+Pragma: no-cache
+Content-Length: 180
+Content-Type: application/json
+
+{"access_token":"c33869b8f9da3396332825568325910a","expires_in":3600,"scope":"documents profile tokeninfo","refresh_token":"7227f9d3a7cacb9ae3df8b95e9680ee4","token_type":"bearer"}
+
+GET /api/profile HTTP/1.1
+Host: appserver.org31
+User-Agent: Guzzle/3.9.1 curl/7.35.0 PHP/5.5.9-1ubuntu4.14
+Accept: application/json
+Authorization: Bearer c33869b8f9da3396332825568325910a
+
+HTTP/1.1 200 OK
+Date: Sun, 10Apr 2016 17:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Vary: Authorization
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+Content-Length:45
+Content-Type: application/json
+
+{"name":"testing","email":"testing@test.com"}
+
+GET /api/tokenInfo HTTP/1.1
+Host: appserver.org31
+User-Agent: Guzzle/3.9.1 curl/7.35.0 PHP/5.5.9-1ubuntu4.14
+Accept: application/json
+Authorization: Bearer c33869b8f9da3396332825568325910a
+
+HTTP/1.1 200 OK
+Date: Sun, 10Apr 2016 17:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Vary: Authorization
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+Content-Length:454
+Content-Type: application/json
+
+{"active":true,"exp":1460313604,"iat":1460310004,"scope":"documents profile tokeninfo","client_id":"appclient","sub":"154bb6633c54dee151b4625573e50ce4e59b7d78","token_type":"bearer","x-entitlement":["urn:x-oauth:entitlement:applications","urn:x-oauth:entitlement:administration"],"x-ext":{"uid":["user1"],"eduPersonAffiliation":["member","person"],"eduPersonEntitlement":["urn:x-oauth:entitlement:applications","urn:x-oauth:entitlement:administration"]}}
+
+GET /api/profile HTTP/1.1
+Host: appserver.org31
+User-Agent: Guzzle/3.9.1 curl/7.35.0 PHP/5.5.9-1ubuntu4.14
+Accept: application/json
+Authorization: Bearer c33869b8f9da3396332825568325910a
+
+
+
+HTTP/1.1 200 OK
+Date: Sun, 10Apr 2016 17:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Vary: Authorization
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+Content-Length:45
+Content-Type: application/json
+
+{"name":"testing","email":"testing@test.com"}
+
+GET /api/documents HTTP/1.1
+Host: appserver.org31
+User-Agent: Guzzle/3.9.1 curl/7.35.0 PHP/5.5.9-1ubuntu4.14
+Accept: application/json
+Authorization: Bearer c33869b8f9da3396332825568325910a
+
+
+
+HTTP/1.1 200 OK
+Date: Sun, 10Apr 2016 17:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Vary: Authorization
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+Content-Length:214
+Content-Type: application/json
+
+{"name":"testing","email":"testing@test.com","documents":{"1":{"name":"Document 1","type":"PDF","last_modified":"2016-04-07 19:40:04"},"2":{"name":"Document 2","type":"DOCX","last_modified":"2016-04-05 19:40:04"}}}
+
+GET /api/notAllowed HTTP/1.1
+Host: appserver.org31
+User-Agent: Guzzle/3.9.1 curl/7.35.0 PHP/5.5.9-1ubuntu4.14
+Accept: application/json
+Authorization: Bearer c33869b8f9da3396332825568325910a
+
+
+
+HTTP/1.1 403 Forbidden
+Date: Sun, 10 Apr 201617:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Vary: Authorization
+X-Powered-By:PHP/5.5.9-1ubuntu4.14
+Content-Length: 88
+Content-Type: application/json
+
+{"success":"false","error":"You donot have the required scope: notallowed.","code":403}
+
+GET /api/profile HTTP/1.1
+Host: appserver.org31
+User-Agent: Guzzle/3.9.1 curl/7.35.0 PHP/5.5.9-1ubuntu4.14
+Accept: application/json
+Authorization: Bearer invalidtoken
+
+
+
+HTTP/1.1 401 Unauthorized
+Date: Sun, 10 Apr 2016 17:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+Vary: Authorization
+X-Powered-By: PHP/5.5.9-1ubuntu4.14
+Content-Length: 108
+Content-Type: application/json
+
+{"success":"false","error":"invalid_token, theaccess token isnot active (Bearer invalidtoken)","code":401}
