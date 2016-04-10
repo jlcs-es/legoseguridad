@@ -364,32 +364,26 @@ Con estos cambios y el script la máquina \textit{server.org32} sirve la web \te
 
 \section{Análisis de trazas}
 
+Normalmente capturaríamos las trazas con Wireshark, y las interpretaríamos. Sin embargo, existe una herramienta llamada SAML Tracer (es un complemento de Firefox) que, si se utiliza mientras hacemos el login Single Sign On, muestra los intercambios y permite extraer el intercambio SAML. Con este intercambio podemos ahorrar tiempo ya que SAML viaja a través de HTTP, y no tenemos intención de analizar las trazas HTTP.
 
+Si entramos en appclient.org32, hacemos login (que nos redirige a saml.org31, el IdP), y nos autenticamos como \textbf{user1}, se realizan dos intercambios SAML. El primero, es un intercambio de appclient de org32 para saml de org31, indicando que alguien quiere autenticarse, y el segundo, después de haber hecho login en saml.org31, va desde saml en org31 para appclient en org32, indicando información del usuario.
 
+La traza completa con ambos intercambios es:
 
+%TODO: incluir aquí el fichero anexos/traza.txt
 
+De esta traza destaco los siguientes apartados XML:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{itemize}
+	\item <samlp:AuthnRequest ...> indica una petición de autenticación, con ID="\_49881caa8878bdd61c79da8c16d70a77d493e2e30e". Este id es importante, es al que tendrá que responder el IdP.
+	\item Dentro del samlp:AuthnRequest el Destination="http://saml.org31/saml2/idp/SSOService.php" indica a donde tiene que dirigirse el cliente a completar la petición.
+	\item Dentro también del samlp:AuthnRequest se encuentra AssertionConsumerServiceURL="http://oauth.org31/module.php/saml/sp/saml2-acs.php/oauth-sp", a donde habrá que volver una vez obtenida la respuesta.
+	\item <samlp:Response ...> es la etiqueta XML para la respuesta a la petición. Se sabe que es respuesta a la petición anterior porque el campo InResponseTo="\_49881caa8878bdd61c79da8c16d70a77d493e2e30e" coincide exactamente con el ID de la petición.
+	\item En ds:Signature y en las etiquetas hijas, está la firma de la respuesta. La respuesta la firma digitalmente el IdP para que los servicios puedan fiarse de la información que el cliente está transportando. Contiene información de como se firma el mensaje, así cómo el certificado del IdP.
+	\item El StatusCode [...] Success indica que el intento de login fue correcto. 
+	%TODO: hay elementos que no sé para que sirven después del status.
+	\item Al final de la traza, hay unos atributos que indican el nombre de usuario, los grupos a los que pertenece (person, member) y sus roles (applications, administration).
+\end{itemize}
 
 \section{Conclusiones}
 
