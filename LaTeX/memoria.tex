@@ -364,6 +364,13 @@ Con estos cambios y el script la máquina \textit{server.org32} sirve la web \te
 
 \section{Análisis de trazas}
 
+Para entender el intercambio de mensajes podemos fijarnos en la siguiente imagen:
+
+\begin{center}
+\includegraphics[width=0.9\linewidth]{images/sequence-diagram-standard}
+\end{center}
+
+
 \subsection{SAML}
 
 Normalmente capturaríamos las trazas con Wireshark, y las interpretaríamos. Sin embargo, existe una herramienta llamada SAML Tracer (es un complemento de Firefox) que, si se utiliza mientras hacemos el login Single Sign On, muestra los intercambios y permite extraer el intercambio SAML. Con este intercambio podemos ahorrar tiempo ya que SAML viaja a través de HTTP, y no tenemos intención de analizar las trazas HTTP.
@@ -372,7 +379,7 @@ Si entramos en appclient.org32, hacemos login (que nos redirige a saml.org31, el
 
 Para ver la traza hay que abrir \noindent \textbf{anexos/traza.txt}, ya que el documento tiene líneas demasiado largas para aparecer correctamente en el documento. 
 
-De esta traza destaco los siguientes apartados XML:
+De esta traza destacamos los siguientes apartados XML:
 
 \begin{itemize}
 	\item $<$samlp:AuthnRequest ...$>$ indica una petición de autenticación, con ID=\_49881caa8878bdd61c79da8c16d70a77d493e2e30e. Este id es importante, es al que tendrá que responder el IdP.
@@ -387,7 +394,7 @@ De esta traza destaco los siguientes apartados XML:
 
 \subsection{Oauth}
 
-Para esta parte sí que he usado Wireshark. Sin embargo, como viaja por HTTP, adjuntamos el payload HTTP:
+Para esta parte sí que hemos usado Wireshark. Sin embargo, como viaja por HTTP, adjuntamos el payload HTTP, ignorando las cabeceras TCP, direcciones (porque van implícitos los hosts en HTTP, etc...):
 
 \VerbatimInput{anexos/oauth.txt}
 
