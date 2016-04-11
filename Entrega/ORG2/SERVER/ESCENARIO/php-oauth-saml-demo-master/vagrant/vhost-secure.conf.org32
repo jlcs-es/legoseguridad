@@ -1,0 +1,16 @@
+<VirtualHost *:443>
+    SSLEngine on
+    SSLCertificateFile "/etc/apache2/cert/appclient.org32.crt"
+    SSLCertificateKeyFile "/etc/apache2/cert/appclient.org32.pem"
+
+
+    DocumentRoot "/var/www/appclient/public/"
+    ServerName appclient.org32
+    <Directory "/var/www/appclient/public/">
+    DirectoryIndex index.php
+        Options FollowSymLinks
+        AllowOverride FileInfo
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
